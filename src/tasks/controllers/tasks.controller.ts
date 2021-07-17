@@ -1,30 +1,35 @@
 import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common';
+import { TasksService } from '../services/tasks.service';
 
 @Controller('api/tasks')
 export class TasksController {
 
-    @Get("filter")
+    constructor(
+        private tasksService: TasksService
+    ){}
+
+    @Get()
     getAll() {
-        return [1, 2, 3];
+        return this.tasksService.findAll();
     }
 
     @Get(':id')
     getOne(@Param('id') id: number) {
-        return id;
+        return this.tasksService.findOne(id);
     }
 
     @Post()
     create(@Body() body: any) {
-        return body;
+        return this.tasksService.create(body);
     }
 
     @Put(':id')
     update(@Param('id') id: number, @Body() body: any) {
-        return body;
+        return this.tasksService.update(id,body);
     }
 
     @Delete(':id')
     delete(@Param('id') id: number) {
-        return true;
+        return this.tasksService.delete(id);
     }
 }
