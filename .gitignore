@@ -2,7 +2,7 @@
 /dist
 /node_modules
 /postgresql-volume
-
+/src/database
 # Logs
 logs
 *.log
